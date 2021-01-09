@@ -10,6 +10,8 @@
   </head>
 
   <body>
+    <p class="errors"><%= flash[:errors] %></p>
+    <p class="success"><%= flash[:success] %></p>
     <%= yield %>
   </body>
 </html>
