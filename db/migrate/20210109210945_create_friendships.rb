@@ -3,8 +3,7 @@ class CreateFriendships < ActiveRecord::Migration[6.0]
     create_table :friendships do |t|
       t.references :requestor, null: false, foreign_key: {to_table: :users}
       t.references :requestee, null: false, foreign_key: {to_table: :users}
-      t.boolean :accepted, default: false
-      t.boolean :denied, default: false
+      t.boolean :status, default: false
 
       t.timestamps
     end
