@@ -8,7 +8,7 @@
     <% elsif current_user.pending_received_requests.include?(@user) %>
         <%= "#{@user.name} sent you a request!"  %>
         <%= link_to "Accept", user_friendship_path(@user), method: 'patch' %>
-        <%#= link_to "Deny" %>
+        <%= link_to "Deny", user_friendship_path(@user), method: 'delete' %>
     <% elsif current_user.friends.include?(@user) %>
         <%= "Friends" %>
     <% else %>

@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_09_210945) do
+ActiveRecord::Schema.define(version: 2021_01_12_210208) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content", null: false
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "friendships", force: :cascade do |t|
     t.integer "requestor_id", null: false
@@ -22,6 +32,14 @@ ActiveRecord::Schema.define(version: 2021_01_09_210945) do
     t.index ["requestee_id"], name: "index_friendships_on_requestee_id"
     t.index ["requestor_id", "requestee_id"], name: "index_friendships_on_requestor_id_and_requestee_id", unique: true
     t.index ["requestor_id"], name: "index_friendships_on_requestor_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.string "likeable_type"
+    t.integer "likeable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
   end
 
   create_table "posts", force: :cascade do |t|
