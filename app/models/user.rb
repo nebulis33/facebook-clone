@@ -9,7 +9,13 @@ class User < ApplicationRecord
   has_many :requests_sent, class_name: 'Friendship', foreign_key: :requestor_id, inverse_of: :requestor, dependent: :destroy
   has_many :requests_received, class_name: 'Friendship', foreign_key: :requestee_id, inverse_of: :requestee, dependent: :destroy
 
-  has_many :friends, -> {merge(Friendship.friends)}, through: :requests_sent, source: :requestee
+  has_many :friends_1, -> {merge(Friendship.friends)}, through: :requests_sent, source: :requestee
+  has_many :friends_2, -> {merge(Friendship.friends)}, through: :requests_received, source: :requestor
+  #has_many :friends, -> {where"(Friendship.joins('INNER JOIN friendships on freindships.requestor_id = user.id OR friendships.requestee_id = user.id AND friendships.status = 1))"}
   has_many :pending_sent_requests, -> {merge(Friendship.pending)}, through: :requests_sent, source: :requestee
   has_many :pending_received_requests, -> {merge(Friendship.pending)}, through: :requests_received, source: :requestor
+
+  def friends
+    (friends_1.all + friends_2.all).uniq
+  end
 end
