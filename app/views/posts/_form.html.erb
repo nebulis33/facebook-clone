@@ -1,0 +1,4 @@
+<%= form_with model: @post do |f| %>
+    <%= f.text_field :body, placeholder: "Write a post..." %>
+    <%= f.submit "post" %>
+<% end %>

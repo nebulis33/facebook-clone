@@ -15,3 +15,11 @@
         <%= link_to "Send friend request", user_friendship_path(@user), method: 'post' unless @user == current_user %>
     <% end %>
 </p>
+<%= render 'posts/form' %>
+<section class="post">
+    <% @user.posts.each do |post| %>
+        <p><%= render partial: 'shared/post', locals: {user: @user, post: post} %></p>
+        <p><%= render partial: 'comments/form', locals: {post: post} %></p>
+        <p><%= render partial: 'shared/comments', locals: {user: @user, post: post} %></p>
+    <% end %>
+</section>

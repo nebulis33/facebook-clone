@@ -1,0 +1,9 @@
+<% post.comments.each do |comment| %>
+    <div class="comment">
+        <%= comment.author.name %>
+        <br>
+        <p><%= comment.content %></p>
+        <%= pluralize(comment.like_count, "like") %>
+        <%= link_to "like", like_comment_path(comment), method: 'post' %>
+    </div>
+<% end %>

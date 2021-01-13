@@ -1,0 +1,3 @@
+<h3><%= post.author.name %></h3>
+<p><%= post.body %></p>
+<p><%= pluralize(post.like_count, 'like') %> <%= link_to "like", like_post_path(post), method: 'post' %></p>
