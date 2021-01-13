@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  root to: 'users#show'
+  root to: 'users#index'
 
-  devise_for :users, path: 'member', path_names: {sign_in: 'login', sign_out: 'logout'}
+  devise_for :users, path: 'member', path_names: {sign_in: 'login', sign_out: 'logout'}, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
 
   resources :users, only: [:index, :show] do
     resource :friendship, only: [:create, :update, :destroy]

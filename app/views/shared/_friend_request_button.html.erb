@@ -1,0 +1,11 @@
+<% if current_user.pending_sent_requests.include?(user) %>
+    <%= "Friend request pending." %>
+<% elsif current_user.pending_received_requests.include?(user) %>
+    <%= "#{user.name} sent you a request!"  %>
+    <%= link_to "Accept", user_friendship_path(user), method: 'patch' %>
+    <%= link_to "Deny", user_friendship_path(user), method: 'delete' %>
+<% elsif current_user.friends.include?(user) %>
+    <%= "Friends" %>
+<% else %>
+    <%= link_to "Send friend request", user_friendship_path(user), method: 'post' unless user == current_user %>
+<% end %>
