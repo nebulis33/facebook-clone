@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  after_commit :add_default_avatar, on: [:create, :update]
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook]
@@ -10,6 +12,8 @@ class User < ApplicationRecord
   has_many :requests_received, class_name: 'Friendship', foreign_key: :requestee_id, inverse_of: :requestee, dependent: :destroy
   has_many :comments, inverse_of: :author
 
+  has_one_attached :avatar
+
   has_many :friends_1, -> {merge(Friendship.friends)}, through: :requests_sent, source: :requestee
   has_many :friends_2, -> {merge(Friendship.friends)}, through: :requests_received, source: :requestor
   has_many :pending_sent_requests, -> {merge(Friendship.pending)}, through: :requests_sent, source: :requestee
@@ -20,7 +24,7 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name
-      #user.image = auth.info.image
+      # user.avatar = URI.parse(auth.info.image)
       # If you are using confirmable and the provider(s) you use validate emails, 
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
@@ -42,5 +46,11 @@ class User < ApplicationRecord
   
   def posts_feed
     Post.where(author: self).or(Post.where(author: [self.friends])).order(created_at: :desc)
+  end
+
+  def add_default_avatar
+    unless avatar.attached?
+      self.avatar.attach(io: File.open(Rails.root.join("app", "assets", "images", "default.png")), filename: 'default.png', content_type: "image/png")
+    end
   end
 end

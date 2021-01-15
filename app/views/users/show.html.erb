@@ -1,11 +1,10 @@
-<header><%= render 'shared/navbar' %></header>
-
-<h1><%= @user.name %></h1>
+<h1><%= image_tag @user.avatar.variant(resize: "100x100!") %> <%= @user.name %></h1>
+<%= link_to "edit profile", edit_user_registration_path if @user == current_user %>
 
 <p>
     <%= render partial: 'shared/friend_request_button', locals: {user: @user} %>
 </p>
-<%= render 'posts/form' %>
+<%= render 'posts/form' if @user == current_user %>
 <section class="post">
     <% @user.posts.each do |post| %>
         <p><%= render partial: 'shared/post', locals: {user: @user, post: post} %></p>

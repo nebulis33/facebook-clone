@@ -35,6 +35,12 @@ class PostsController < ApplicationController
         like.save
     end
 
+    def unlike
+        post = Post.find(params[:id])
+        like = post.likes.where(user_id: current_user.id).first
+        like.destroy if like
+    end
+
     private
         def post_params
             params.require(:post).permit(:body)

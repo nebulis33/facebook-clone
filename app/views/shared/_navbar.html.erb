@@ -1,4 +1,5 @@
 <nav>
     <div><%= link_to "Home", root_path %></div>
     <div><%= link_to "Sign out", destroy_user_session_path, method: 'delete' %></div>
+    <div><%= link_to "profile", user_path(current_user) %></div>
 </nav>

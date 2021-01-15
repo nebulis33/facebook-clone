@@ -35,6 +35,12 @@ class CommentsController < ApplicationController
         like.save
     end
 
+    def unlike
+        comment = Comment.find(params[:id])
+        like = comment.likes.where(user_id: current_user.id).first
+        like.destroy if like
+    end
+
     private
         def comment_params
             params.require(:comment).permit(:content, :post_id)

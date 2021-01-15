@@ -1,9 +1,9 @@
 <% post.comments.limit(5).each do |comment| %>
     <div class="comment">
-        <%= comment.author.name %>
+        <%= image_tag comment.author.avatar.variant(resize: "30x30!") %> <%= comment.author.name %>
         <br>
         <p><%= comment.content %></p>
         <%= pluralize(comment.like_count, "like") %>
-        <%= link_to "like", like_comment_path(comment), method: 'post' %>
+        <%= link_to "like", like_comment_path(comment), method: 'post' %> <%= link_to "unlike", unlike_comment_path(comment), method: 'delete' %>
     </div>
 <% end %>

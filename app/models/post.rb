@@ -12,4 +12,5 @@ class Post < ApplicationRecord
     def posts_feed
         Post.where(author: current_user)
     end
+
 end
