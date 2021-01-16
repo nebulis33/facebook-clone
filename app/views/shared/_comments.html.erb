@@ -1,6 +1,6 @@
 <% post.comments.limit(5).each do |comment| %>
     <div class="comment">
-        <%= image_tag comment.author.avatar.variant(resize: "30x30!") %> <%= comment.author.name %>
+        <%#= image_tag comment.author.avatar.variant(resize: "30x30!") %> <b><%= comment.author.name %></b>
         <br>
         <p><%= comment.content %></p>
         <%= pluralize(comment.like_count, "like") %>

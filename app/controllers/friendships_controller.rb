@@ -2,7 +2,7 @@ class FriendshipsController < ApplicationController
     def create
         @request = current_user.requests_sent.build(requestee_id: params[:user_id])
         if @request.save
-            redirect_to user_path(params[:user_id])
+            redirect_to request.referer
         else
             flash[:errors] = @request.errors.full_messages
             redirect_to user_path(params[:user_id])
@@ -12,7 +12,8 @@ class FriendshipsController < ApplicationController
     def update
         @request = Friendship.find_by(requestor_id: params[:user_id], requestee_id: current_user.id)
         if @request.toggle!(:status)
-            redirect_to user_path(params[:user_id])
+            flash[:success] = "You accepted the request!"
+            redirect_to request.referer
         else
             flash[:errors] = @request.errors.full_messages
             redirect_to user_path(params[:user_id])
@@ -21,7 +22,10 @@ class FriendshipsController < ApplicationController
 
     def destroy
         @request = Friendship.find_by(requestor_id: params[:user_id], requestee_id: current_user.id)
-        @request.destroy
-        redirect_to user_path(params[:user_id])
+        if @request.destroy
+            redirect_to request.referer
+        else
+            flash[:errors] = @request.errors.full_messages
+        end
     end
 end

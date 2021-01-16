@@ -16,6 +16,7 @@ class User < ApplicationRecord
 
   has_many :friends_1, -> {merge(Friendship.friends)}, through: :requests_sent, source: :requestee
   has_many :friends_2, -> {merge(Friendship.friends)}, through: :requests_received, source: :requestor
+  #has_many :friends, -> {joins(:friends_1).merge(User.friends_2)}
   has_many :pending_sent_requests, -> {merge(Friendship.pending)}, through: :requests_sent, source: :requestee
   has_many :pending_received_requests, -> {merge(Friendship.pending)}, through: :requests_received, source: :requestor
 
@@ -24,10 +25,6 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name
-      # user.avatar = URI.parse(auth.info.image)
-      # If you are using confirmable and the provider(s) you use validate emails, 
-      # uncomment the line below to skip the confirmation emails.
-      # user.skip_confirmation!
     end
   end
 
@@ -42,7 +39,6 @@ class User < ApplicationRecord
   def friends
     (friends_1.all + friends_2.all).uniq
   end
-
   
   def posts_feed
     Post.where(author: self).or(Post.where(author: [self.friends])).order(created_at: :desc)

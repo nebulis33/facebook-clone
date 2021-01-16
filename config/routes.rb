@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show] do
     resource :friendship, only: [:create, :update, :destroy]
+    get 'requests', on: :collection
   end
   resources :posts, except: [:show, :new] do
     #resources :comments, only: [:create, :destroy]
