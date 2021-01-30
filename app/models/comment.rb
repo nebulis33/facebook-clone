@@ -5,6 +5,6 @@ class Comment < ApplicationRecord
     has_many :likes, as: :likeable
 
     def like_count
-        self.likes.count
+        self.likes.size
     end
 end

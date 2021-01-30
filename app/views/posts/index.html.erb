@@ -1,4 +1,4 @@
-<% current_user.posts_feed.each do |post| %>
+<% @posts.each do |post| %>
     <p><%= render partial: 'shared/post', locals: {post: post} %></p>
     <p><%= render partial: 'comments/form', locals: {post: post} %></p>
     <p><%= render partial: 'shared/comments', locals: {post: post} %></p>

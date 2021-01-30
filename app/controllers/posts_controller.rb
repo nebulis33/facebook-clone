@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
     def index
-        @posts = Post.all
+        @posts = Post.includes(:author, :likes, comments: [:author, :likes])
+        .where(author: current_user.friends)
+        .or(Post.includes(:author, :likes, comments: [:author, :likes]).where(author: current_user))
+        .order(created_at: :desc)
     end
 
     def new

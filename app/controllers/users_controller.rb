@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     end
     
     def show
-        @posts = Post.where(author: current_user).order(created_at: :desc)
+        @posts = Post.includes(:author, :likes, comments: [:author, :likes]).where(author: params[:id]).order(created_at: :desc)
         @user = User.find(params[:id])
         @post = current_user.posts.new
     end

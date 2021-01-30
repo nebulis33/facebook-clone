@@ -1,4 +1,4 @@
-<% post.comments.limit(5).each do |comment| %>
+<% post.comments.each do |comment| %>
     <div class="comment">
         <%#= image_tag comment.author.avatar.variant(resize: "30x30!") %> <b><%= comment.author.name %></b>
         <br>
