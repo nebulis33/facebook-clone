@@ -39,10 +39,6 @@ class User < ApplicationRecord
   def friends
     (friends_1.all + friends_2.all).uniq
   end
-  
-  def posts_feed
-    Post.where(author: self).or(Post.where(author: [self.friends])).order(created_at: :desc)
-  end
 
   def add_default_avatar
     unless avatar.attached?

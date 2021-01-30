@@ -9,10 +9,6 @@ class Post < ApplicationRecord
         self.likes.size
     end
 
-    # def posts_feed
-    #     Post.where(author: current_user)
-    # end
-
     def posts_feed
         Post.where(author: current_user).or(Post.where(author: [current_user.friends])).order(created_at: :desc)
     end
