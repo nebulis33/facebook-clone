@@ -1,3 +1,16 @@
-<h3><%= image_tag post.author.avatar.variant(resize: "40x40!") %> <%= post.author.name %></h3>
+<h3><%#= image_tag post.author.avatar.variant(resize: "40x40!") %> <%#= post.author.name %></h3>
+
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-40x40">
+      <%= image_tag post.author.avatar.variant(resize: "40x40!") %>
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <p><strong><%= post.author.name %></strong></p>
+    </div>
+  </div>
+</article>
 <p><%= post.body %></p>
 <p><%= pluralize(post.like_count, 'like') %> <%= link_to "like", like_post_path(post), method: 'post' %> <%= link_to "unlike", unlike_post_path(post), method: 'delete' %></p>

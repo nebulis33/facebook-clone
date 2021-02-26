@@ -1,14 +1,27 @@
-<h1><%= image_tag @user.avatar.variant(resize: "100x100!") %> <%= @user.name %></h1>
-<%= link_to "edit profile", edit_user_registration_path if @user == current_user %>
 
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-100x100">
+      <%= image_tag @user.avatar.variant(resize: "100x100!") %>
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <p><strong><%= @user.name %></strong></p>
+    </div>
+  </div>
+</article>
+<br><br>
 <p>
     <%= render partial: 'friend_status', locals: {user: @user} %>
 </p>
 <%= render 'posts/form' if @user == current_user %>
 <section class="post">
     <% @posts.each do |post| %>
+    <article class="box">
         <p><%= render partial: 'shared/post', locals: {post: post} %></p>
-        <p><%= render partial: 'comments/form', locals: {post: post} %></p>
         <p><%= render partial: 'shared/comments', locals: {post: post} %></p>
+        <p><%= render partial: 'comments/form', locals: {post: post} %></p>
+    </article>
     <% end %>
 </section>

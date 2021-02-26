@@ -1,4 +1,4 @@
 <%= form_with model: @post do |f| %>
-    <%= f.text_field :body, placeholder: "Write a post..." %>
-    <%= f.submit "post" %>
+    <%= f.text_area :body, placeholder: "Write a post...", class: "textarea" %>
+    <%= f.submit "post", class: "button" %>
 <% end %>

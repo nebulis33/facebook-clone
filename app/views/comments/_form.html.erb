@@ -1,5 +1,5 @@
 <%= form_with url: '/comments', method: 'post' do |f| %>
     <%= f.hidden_field 'comment[post_id', value: post.id %>
-    <%= f.text_field 'comment[content]', placeholder: "Write a comment..." %>
-    <%= f.submit "comment" %>
+    <%= f.text_area 'comment[content]', placeholder: "Write a comment...", class: "textarea" %>
+    <%= f.submit "comment", class: "button" %>
 <% end %>

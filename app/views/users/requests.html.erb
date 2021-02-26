@@ -1,14 +1,12 @@
 <% if @requests.exists? %>
-    <ul>
         <% @requests.each do |user| %>
-            <li>
-                <%= image_tag user.avatar.variant(resize: "50x50!") %>
-                <%= link_to user.name, user_path(user) %>
-                <%= link_to "Accept", user_friendship_path(user), method: 'patch' %>
-                <%= link_to "Deny", user_friendship_path(user), method: 'delete' %>
-            </li>
+                <div>
+                    <%= image_tag user.avatar.variant(resize: "50x50!") %>
+                    <%= link_to user.name, user_path(user) %>
+                    <%= link_to "Accept", user_friendship_path(user), method: 'patch', class: "button is-success is-small" %>
+                    <%= link_to "Deny", user_friendship_path(user), method: 'delete', class: "button is-danger is-small" %>
+                </div>
         <% end %>
-    </ul>
 <% else %>
     No pending requests right now!
 <% end %>

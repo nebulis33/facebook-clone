@@ -34,6 +34,7 @@ gem 'omniauth-facebook', '~> 8.0'
 gem 'image_processing', '~> 1.12', '>= 1.12.1'
 # gem 'mini_magick', '~> 4.11'
 gem 'cloudinary', '~> 1.18', '>= 1.18.1'
+gem "bulma-rails", "~> 0.9.1"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
