@@ -1,9 +1,13 @@
 <% post.comments.each do |comment| %>
-    <div class="comment">
-        <%= image_tag comment.author.avatar.variant(resize: "30x30!") %> <b><%= comment.author.name %></b>
-        <br>
-        <p><%= comment.content %></p>
-        <%= pluralize(comment.like_count, "like") %>
-        <%= link_to "like", like_comment_path(comment), method: 'post' %> <%= link_to "unlike", unlike_comment_path(comment), method: 'delete' %>
+    <div class="comment box">
+        <div class="block">
+            <%= image_tag comment.author.avatar.variant(resize: "30x30!") %>
+            <b><%= link_to comment.author.name, user_path(comment.author) %></b>
+        </div>
+        <p class="block"><%= comment.content %></p>
+        <div class="block">
+            <%= pluralize(comment.like_count, "like") %>
+            <%= link_to "like", like_comment_path(comment), method: 'post' %> <%= link_to "unlike", unlike_comment_path(comment), method: 'delete' %>
+        </div>
     </div>
 <% end %>

@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Create users
-User.create(name: "John", email: "john@web.com", password: "foobar")
+User.create(name: "John", email: "foo@bar.baz", password: "foobar")
 User.create(name: "Sarah", email: "sarah@web.com", password: "foobar")
 User.create(name: "Shane", email: "shane@web.com", password: "foobar")
 User.create(name: Faker::Name.name, email: Faker::Internet.email, password: "foobar")

@@ -1,5 +1,17 @@
-<%= form_with url: '/comments', method: 'post' do |f| %>
-    <%= f.hidden_field 'comment[post_id', value: post.id %>
-    <%= f.text_area 'comment[content]', placeholder: "Write a comment...", class: "textarea" %>
-    <%= f.submit "comment", class: "button" %>
+<%= form_with url: '/comments', method: 'post', class: "block" do |f| %>
+    <div class="field">
+        <div class="control">
+            <%= f.hidden_field 'comment[post_id]', value: post.id %>
+        </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <%= f.text_area 'comment[content]', placeholder: "Write a comment...", class: "textarea" %>
+        </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <%= f.submit "comment", class: "button is-primary" %>
+        </div>
+    </div>
 <% end %>

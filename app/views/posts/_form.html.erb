@@ -1,4 +1,12 @@
-<%= form_with model: @post do |f| %>
-    <%= f.text_area :body, placeholder: "Write a post...", class: "textarea" %>
-    <%= f.submit "post", class: "button" %>
+<%= form_with model: @post, class: "block" do |f| %>
+    <div class="field">
+        <div class="control">
+            <%= f.text_area :body, placeholder: "Write a post...", class: "textarea" %>
+        </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <%= f.submit "post", class: "button is-primary" %>
+        </div>
+    </div>
 <% end %>

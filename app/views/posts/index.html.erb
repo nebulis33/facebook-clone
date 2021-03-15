@@ -1,10 +1,13 @@
-<br>
-<%= render 'posts/form' %>
-<% @posts.each do |post| %>
-    <article class="box">
-        <p><%= render partial: 'shared/post', locals: {post: post} %></p>
-        <p><%= render partial: 'comments/form', locals: {post: post} %></p>
-        <p><%= render partial: 'shared/comments', locals: {post: post} %></p>
-    <br>
-    </article>
-<% end %>
+<section class="container">
+    <div class="section has-text-left">
+        <%= render 'posts/form' %>
+        <% @posts.each do |post| %>
+            <article class="box">
+                <p><%= render partial: 'shared/post', locals: {post: post} %></p>
+                <p><%= render partial: 'comments/form', locals: {post: post} %></p>
+                <p><%= render partial: 'shared/comments', locals: {post: post} %></p>
+            <br>
+            </article>
+        <% end %>
+    </div>
+</section>

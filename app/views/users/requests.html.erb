@@ -1,12 +1,24 @@
-<% if @requests.exists? %>
-        <% @requests.each do |user| %>
-                <div>
-                    <%= image_tag user.avatar.variant(resize: "50x50!") %>
-                    <%= link_to user.name, user_path(user) %>
-                    <%= link_to "Accept", user_friendship_path(user), method: 'patch', class: "button is-success is-small" %>
-                    <%= link_to "Deny", user_friendship_path(user), method: 'delete', class: "button is-danger is-small" %>
-                </div>
-        <% end %>
-<% else %>
-    No pending requests right now!
-<% end %>
+
+
+<section class="container">
+    <div class="columns is-centered">
+        <ul class="column is-half">
+            <% if @requests.exists? %>
+                <% @requests.each do |user| %>
+                    <li class="box level">
+                        <div class="level-left">
+                            <%= image_tag user.avatar.variant(resize: "60x60!"), class: "level-item" %>
+                            <%= link_to user.name, user_path(user), class: "level-item" %>
+                        </div>
+                        <div class="level-right">
+                            <%= link_to "Accept", user_friendship_path(user), method: 'patch', class: "button is-success is-small" %>
+                            <%= link_to "Deny", user_friendship_path(user), method: 'delete', class: "button is-danger is-small" %>
+                        </div>
+                    </li>
+                <% end %>
+            <% else %>
+                <p>No pending requests right now!</p>
+            <% end %>
+        </ul>
+    </div>
+</section>

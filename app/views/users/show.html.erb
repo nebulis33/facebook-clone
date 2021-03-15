@@ -1,27 +1,22 @@
-
-<article class="media">
-  <figure class="media-left">
-    <p class="image is-100x100">
-      <%= image_tag @user.avatar.variant(resize: "100x100!") %>
-    </p>
-  </figure>
-  <div class="media-content">
-    <div class="content">
-      <p><strong><%= @user.name %></strong></p>
+<section class="container">
+  <div class="level">
+    <div class="level-left">
+       <%= image_tag @user.avatar.variant(resize: "100x100!"), class: "level-item" %>
+       <strong class="level-item"><%= @user.name %></strong>
+      <p class="level-item"><%= render partial: 'friend_status', locals: {user: @user} %></p>
+    </div>
+    <div class="level-right">
+      <%= link_to "Edit my Account", edit_user_registration_path if @user == current_user %>
     </div>
   </div>
-</article>
-<br><br>
-<p>
-    <%= render partial: 'friend_status', locals: {user: @user} %>
-</p>
-<%= render 'posts/form' if @user == current_user %>
-<section class="post">
-    <% @posts.each do |post| %>
-    <article class="box">
-        <p><%= render partial: 'shared/post', locals: {post: post} %></p>
-        <p><%= render partial: 'shared/comments', locals: {post: post} %></p>
-        <p><%= render partial: 'comments/form', locals: {post: post} %></p>
-    </article>
-    <% end %>
+  <%= render 'posts/form' if @user == current_user %>
+  <section class="post">
+      <% @posts.each do |post| %>
+      <article class="box">
+          <p><%= render partial: 'shared/post', locals: {post: post} %></p>
+          <p><%= render partial: 'shared/comments', locals: {post: post} %></p>
+          <p><%= render partial: 'comments/form', locals: {post: post} %></p>
+      </article>
+      <% end %>
+  </section>
 </section>
